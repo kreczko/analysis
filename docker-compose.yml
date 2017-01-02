@@ -1,0 +1,26 @@
+version: "2"
+
+services:
+
+  analysis-base:
+    build:
+      context: base/.
+    image: hepdocker/analysis-base:latest
+
+  cern-root-latest:
+    build:
+      context: cern-root/.
+      args:
+        ROOT_VERSION: v6-08-02
+    image: hepdocker/cern-root:latest
+    depends_on:
+      - analysis-base
+
+  cern-root-5:
+    build:
+      context: cern-root/.
+      args:
+        ROOT_VERSION: v5-99-06
+    image: hepdocker/cern-root:v5-99-06
+    depends_on:
+      - analysis-base
